@@ -1,0 +1,23 @@
+```yaml
+# Configuration for AI Companion learning engine.
+# Tuning parameters and privacy settings.
+database:
+  path: "ai_companion_data.sqlite"
+  timeout: 30
+encryption:
+  # If key_file is empty, a key will be generated on initialize and saved.
+  key_file: "enc_key.key"
+embeddings:
+  dim: 128
+  ngram_min: 3
+  ngram_max: 5
+learning:
+  short_term_window: 50
+  long_term_window: 500
+  forget_rate: 0.001
+  emd_alpha: 0.3  # exponential moving average alpha for emotional baselines
+personality_nn:
+  hidden_size: 32
+  lr: 0.01
+  epochs: 20
+```
