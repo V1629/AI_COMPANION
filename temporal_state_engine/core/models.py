@@ -78,7 +78,8 @@ class ExtractionResult(BaseModel):
     partial_signals: Optional[Dict[str, float]] = None
     
     # Metadata
-    extracted_at: datetime = Field(default_factory=datetime.utcnow)
+    extracted_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc)
+)
     
     @validator('confidence')
     def validate_confidence_threshold(cls, v, values):
@@ -101,7 +102,7 @@ class PRISMScore(BaseModel):
     severity: float
     malleability: float
     significance_score: float
-    calculated_at: datetime = Field(default_factory=datetime.utcnow)
+    calculated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     @validator('significance_score')
     def validate_score_calculation(cls, v, values):
@@ -125,7 +126,7 @@ class StateClassification(BaseModel):
     state_layer: StateLayer
     significance_score: float
     confidence: float
-    classified_at: datetime = Field(default_factory=datetime.utcnow)
+    classified_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     classification_reason: Optional[str] = None
 
 
@@ -262,7 +263,8 @@ class CompoundingEvent(BaseModel):
     compound_window_days: int  # Usually 7
     affected_domain: LifeDomain
     
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc)
+)
 
 
 class ResurgenceEvent(BaseModel):
@@ -280,7 +282,8 @@ class ResurgenceEvent(BaseModel):
     relevance_after: float
     spike_magnitude: float
     
-    occurred_at: datetime = Field(default_factory=datetime.utcnow)
+    occurred_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc)
+)
 
 
 class DecaySnapshot(BaseModel):
@@ -291,7 +294,8 @@ class DecaySnapshot(BaseModel):
     snapshot_id: str
     incident_id: str
     
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc)
+)
     relevance: float
     days_elapsed: int
     
@@ -323,8 +327,8 @@ class UserBaseline(BaseModel):
     calibration_factor: float = Field(default=1.0, ge=0.5, le=1.5)
     
     # Timestamps
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     last_conversation_at: Optional[datetime] = None
     
     class Config:
@@ -343,7 +347,8 @@ class TemporalContext(BaseModel):
     Final output from context_export/ to main pipeline
     """
     user_id: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc)
+)
     
     # State distribution
     dominant_state: StateLayer
