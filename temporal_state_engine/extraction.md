@@ -1,3 +1,8 @@
+
+```mermaid
+
+
+
 flowchart TD
 
 A[1 Week Chat Logs] --> B[Language Detection Layer]
@@ -27,3 +32,5 @@ L --> O
 N --> O
 
 O --> P[Adaptive Response Generator]
+
+```
